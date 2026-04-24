@@ -1,0 +1,128 @@
+name: Local AI Dev
+version: 1.0.0
+schema: v1
+
+models:
+  - name: Llama 3.1 Local
+    provider: ollama
+    model: llama3.1:8b
+    apiBase: http://localhost:11434
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: Dev Assistant (personalizado)
+    provider: ollama
+    model: dev-assistant:latest
+    apiBase: http://localhost:11434
+    roles:
+      - chat
+
+  - name: Autocompletado local
+    provider: ollama
+    model: llama3.1:8b
+    apiBase: http://localhost:11434
+    roles:
+      - autocomplete
+
+prompts:
+  - name: revisar
+    description: Revisa código buscando bugs y mejoras
+    prompt: |
+      Analiza este código en detalle:
+
+      {{{ input }}}
+
+      Responde con 3 secciones:
+      1. 🐛 BUGS: errores o comportamientos inesperados
+      2. ⚡ MEJORAS: refactoring, rendimiento, legibilidad
+      3. ✅ BUENAS PRÁCTICAS: qué cumple y qué no
+
+      Sé específico y muestra el código corregido.
+
+  - name: tests
+    description: Genera tests unitarios completos
+    prompt: |
+      Genera tests unitarios para este código:
+
+      {{{ input }}}
+
+      Usa el framework apropiado (pytest para Python, jest para JS/TS).
+      Incluye casos felices, casos borde y casos de error.
+      El código de tests debe estar listo para ejecutarse.
+
+  - name: explicar
+    description: Explica código línea por línea
+    prompt: |
+      Explica este código de forma clara, como si se lo explicaras a alguien que está aprendiendo:
+
+      {{{ input }}}
+
+      Usa ejemplos concretos cuando ayude a entender.
+
+  - name: optimizar
+    description: Optimiza para mejor rendimiento y legibilidad
+    prompt: |
+      Optimiza este código para mejor rendimiento y legibilidad:
+
+      {{{ input }}}
+
+      Explica cada cambio que hiciste y POR QUÉ mejora el código.
+      Mantén la funcionalidad original intacta.
+
+  - name: docstring
+    description: Agrega documentación al código
+    prompt: |
+      Agrega docstrings y comentarios de documentación a este código:
+
+      {{{ input }}}
+
+      Sigue el estilo estándar del lenguaje:
+      - Google-style para Python
+      - JSDoc para JavaScript/TypeScript
+      - Comentarios XML para C#
+
+      Mantén el código original intacto, solo agrega documentación.
+
+  - name: seguridad
+    description: Analiza vulnerabilidades de seguridad
+    prompt: |
+      Analiza este código buscando vulnerabilidades de seguridad:
+
+      {{{ input }}}
+
+      Busca específicamente:
+      - SQL injection
+      - XSS (Cross-site scripting)
+      - Exposición de datos sensibles
+      - Validación incorrecta de inputs
+      - Manejo inseguro de errores
+      - Autenticación/autorización débil
+
+      Para cada vulnerabilidad, muestra cómo corregirla.
+
+  - name: refactor
+    description: Refactoriza con principios SOLID
+    prompt: |
+      Refactoriza este código aplicando principios SOLID y clean code:
+
+      {{{ input }}}
+
+      - Separa responsabilidades
+      - Mejora nombres de variables y funciones
+      - Extrae funciones cuando sea necesario
+      - Elimina código duplicado
+
+      Explica los cambios aplicados.
+
+  - name: traducir
+    description: Traduce código entre lenguajes
+    prompt: |
+      Traduce este código al lenguaje que se pida (si no se especifica, al más común y moderno):
+
+      {{{ input }}}
+
+      - Mantén exactamente la misma funcionalidad
+      - Usa patrones idiomáticos del lenguaje destino
+      - Explica las diferencias importantes entre ambos
