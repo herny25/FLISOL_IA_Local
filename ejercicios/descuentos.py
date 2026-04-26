@@ -1,15 +1,14 @@
 # descuentos.py
 
 def calcular_descuento(precio, porcentaje):
-    """
-    Calcula el precio con un descuento aplicado.
+    """Calcula el precio con descuento basado en un porcentaje de reducción.
 
     Args:
-        precio (float): El precio original.
-        porcentaje (float): El porcentaje de descuento a aplicar.
+        precio (float): Precio original del producto.
+        porcentaje (float): Porcentaje de descuento a aplicar.
 
     Returns:
-        float: El precio con el descuento aplicado.
+        float: Precio final con descuento aplicado.
     """
     descuento = precio * (porcentaje / 100)
     return precio - descuento

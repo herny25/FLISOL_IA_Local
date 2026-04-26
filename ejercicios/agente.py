@@ -13,7 +13,7 @@ import datetime
 import requests
 
 OLLAMA_URL = "http://localhost:11434/api/chat"
-#MODELO     = "dev-assistant:latest"  # usa el modelo personalizado de Skill 1
+#MODELO     = "dev-assistant:latest"
 MODELO     = "llama3.1:8b"
 MAX_PASOS  = 10
 BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
